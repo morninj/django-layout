@@ -9,7 +9,7 @@ This configuration uses these tools:
 
 * [Ubuntu 12.04 LTS 64-bit Server](http://www.ubuntu.com/download/server)
 * [Python 2.7.3](http://www.python.org/download/releases/2.7.3/)
-* [Django 1.5](https://docs.djangoproject.com/en/dev/releases/1.5/)
+* [Django 1.5.1](https://docs.djangoproject.com/en/dev/releases/1.5/)
 * [virtualenv 1.9.1](https://pypi.python.org/pypi/virtualenv)
 * [virtualenvwrapper 4.0](https://bitbucket.org/dhellmann/virtualenvwrapper/)
 * [nginx 1.4.1](http://nginx.org/en/download.html)
@@ -52,7 +52,22 @@ Next, configure your local virtualenv:
 
     $ mkvirtualenv project_name
     $ cd /path/to/virtualenvs/project_name
-    $ mkdir src
+
+## Create New Django Project
+
+Make sure you're in directory and that the virtualenv is activated. Then 
+run:
+
+    $ pip install Django==1.5.1
+    $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name
+
+Install dependencies:
+
+    $ pip install -r requirements.txt
+
+To keep your virtualenv organized, rename the project directory as `src`:
+
+    $ mv project_name src
     $ cd src
 
 ## Initialize Repository
@@ -67,15 +82,6 @@ To store your code on GitHub, create a new GitHub repository and then run:
     $ git push -u origin master
 
 This is also the spot to add a `README`.
-
-## Create New Django Project
-
-Make sure you're in your project's root directory (e.g., 
-`/path/to/virtualenvs/project_name/src/`). Then run:
-
-    $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name
-
-
 
 ## Configure Development Settings
 
