@@ -1,12 +1,13 @@
 This is a reusable Django project template. It uses:
 
-* Ubuntu 12.04 LTS
-* Python 2.7.3
-* Django 1.5
-* NGINX
-* Green Unicorn
-* MySQL
-<!-- TODO add versions -->
+* [Ubuntu 12.04 LTS 64-bit Server](http://www.ubuntu.com/download/server)
+* [Python 2.7.3](http://www.python.org/download/releases/2.7.3/)
+* [Django 1.5](https://docs.djangoproject.com/en/dev/releases/1.5/)
+* [virtualenv 1.9.1](https://pypi.python.org/pypi/virtualenv)
+* [virtualenvwrapper 4.0](https://bitbucket.org/dhellmann/virtualenvwrapper/)
+* [nginx 1.4.1](http://nginx.org/en/download.html)
+* [Gunicorn 0.17.4](https://pypi.python.org/pypi/gunicorn/)
+* [MySQL 5.6.11](http://dev.mysql.com/downloads/mysql/)
 
 # Project Settings
 
@@ -31,7 +32,15 @@ project's name.
 
 ## Configure Virtualenv
 
+The project should live inside a virtual environment. Virtualenvs help keep 
+projects clean and portable.
+
+First, install and configure [virtualenv] and [virtualenvwrapper]
+
 <!-- TODO install virtualenv and virtualenvwrapper -->
+    $ mkvirtualenv project_name
+    $ cd project_name
+    $ mkdir src
 
     $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name
 <!-- TODO expand-->
@@ -44,6 +53,17 @@ project's name.
 By default, `.gitignore` excludes `settings.py` from the repository. 
 This keeps the settings file from getting clobbered when you sync the 
 code across servers.
+
+## Development Workflow
+
+    $ cd /path/to/virtualenv/
+    $ workon project_name
+    $ cd src/project_name
+    $ python manage.py runserver
+    ... # Make changes
+    $ git commit -am "Description of changes"
+    $ git push origin master
+<!-- TODO fab? -->
 
 # Staging
 
