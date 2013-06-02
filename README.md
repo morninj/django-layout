@@ -9,6 +9,9 @@ This is a reusable Django project template. It uses:
 * [Gunicorn 0.17.4](https://pypi.python.org/pypi/gunicorn/)
 * [MySQL 5.6.11](http://dev.mysql.com/downloads/mysql/)
 
+These instructions explain how to configure development, staging, and 
+production environments.
+
 # Project Settings
 
 By default, Django projects use a single settings file. This is fine for 
@@ -35,12 +38,31 @@ project's name.
 The project should live inside a virtual environment. Virtualenvs help keep 
 projects clean and portable.
 
-First, install and configure [virtualenv] and [virtualenvwrapper]
+First, install and configure 
+[virtualenv](https://pypi.python.org/pypi/virtualenv) and 
+[virtualenvwrapper](https://bitbucket.org/dhellmann/virtualenvwrapper/).
 
-<!-- TODO install virtualenv and virtualenvwrapper -->
+Next, configure your local virtualenv:
+
     $ mkvirtualenv project_name
-    $ cd project_name
+    $ cd /path/to/virtualenvs/project_name
     $ mkdir src
+    $ cd src
+
+## Initialize Repository
+
+The contents of `src` should be under version control. For Git, run:
+
+    $ git init
+
+To store your code on GitHub, create a new GitHub repository and then run:
+
+    $ git remote add origin git@github.com:your_username/repo_name.git
+    $ git push -u origin master
+
+This is also a good place to add a `README`.
+
+## Create New Django Project
 
     $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name
 <!-- TODO expand-->
@@ -50,15 +72,18 @@ First, install and configure [virtualenv] and [virtualenvwrapper]
     $ cd project_name/project_name
     $ cp settings.py.sample settings.py
 
-By default, `.gitignore` excludes `settings.py` from the repository. 
-This keeps the settings file from getting clobbered when you sync the 
-code across servers.
+You should exclude `settings.py` from the repository to avoid clobbering it 
+when you sync the code across servers. To do this, add `.gitignore` in your 
+project's root directory (i.e., `src/`) with this line:
+
+    settings.py
 
 ## Development Workflow
 
     $ cd /path/to/virtualenv/
     $ workon project_name
     $ cd src/project_name
+    $ git pull origin master # Pull changes
     $ python manage.py runserver
     ... # Make changes
     $ git commit -am "Description of changes"
