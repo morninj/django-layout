@@ -1,4 +1,5 @@
-TEMPLATE_DEBUG = DEBUG
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = ''
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -36,10 +37,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '3=li2f5^z0*usu0o+*l%1@3v=drp)!ic#tu$($33#(0(eq*ehe'
-# TODO auto-generate
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
