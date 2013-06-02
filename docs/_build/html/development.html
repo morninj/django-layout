@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Development &mdash; django-layout 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="django-layout 0.1 documentation" href="index.html" />
+    <link rel="next" title="Staging" href="staging.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="staging.html" title="Staging"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">django-layout 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<p>These instructions assume your project is called <tt class="docutils literal"><span class="pre">project_name</span></tt>. You
+can call it whatever you want, but be sure to replace <tt class="docutils literal"><span class="pre">project_name</span></tt>
+with your project&#8217;s name.</p>
+<div class="section" id="configure-virtualenv">
+<h2>Configure Virtualenv<a class="headerlink" href="#configure-virtualenv" title="Permalink to this headline">¶</a></h2>
+<p>The project should live inside a virtual environment. Virtualenvs help
+keep projects clean and portable.</p>
+<p>First, install and configure
+<a class="reference external" href="https://pypi.python.org/pypi/virtualenv">virtualenv</a> and
+<a class="reference external" href="https://bitbucket.org/dhellmann/virtualenvwrapper/">virtualenvwrapper</a>.</p>
+<p>Next, configure your local virtualenv:</p>
+<div class="highlight-python"><pre>$ mkvirtualenv project_name
+$ cd /path/to/virtualenvs/project_name</pre>
+</div>
+</div>
+<div class="section" id="create-new-django-project">
+<h2>Create New Django Project<a class="headerlink" href="#create-new-django-project" title="Permalink to this headline">¶</a></h2>
+<p>Make sure you&#8217;re in directory and that the virtualenv is activated. Then
+run:</p>
+<div class="highlight-python"><pre>$ pip install Django==1.5.1
+$ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name</pre>
+</div>
+<p>To keep your virtualenv organized, rename the project directory as
+<tt class="docutils literal"><span class="pre">src</span></tt>:</p>
+<div class="highlight-python"><pre>$ mv project_name src
+$ cd src</pre>
+</div>
+<p>Install dependencies:</p>
+<div class="highlight-python"><pre>$ pip install -r requirements.txt</pre>
+</div>
+</div>
+<div class="section" id="initialize-repository">
+<h2>Initialize Repository<a class="headerlink" href="#initialize-repository" title="Permalink to this headline">¶</a></h2>
+<p>The contents of <tt class="docutils literal"><span class="pre">src</span></tt> should be under version control. For Git, run:</p>
+<div class="highlight-python"><pre>$ git init
+$ git add * .gitignore
+$ git commit -m "Create new Django project"</pre>
+</div>
+<p>To store your code on GitHub, create a new GitHub repository and then
+run:</p>
+<div class="highlight-python"><pre>$ git remote add origin git@github.com:your_username/repo_name.git
+$ git push -u origin master</pre>
+</div>
+<p>This is also the spot to add a <tt class="docutils literal"><span class="pre">README</span></tt>.</p>
+</div>
+<div class="section" id="configure-development-settings">
+<h2>Configure Development Settings<a class="headerlink" href="#configure-development-settings" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>$ cd project_name/project_name
+$ cp settings.py.sample settings.py</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">settings.py</span></tt> is excluded from the repository to avoid clobbering it
+when you sync the code across servers.</p>
+<p>The default development database is SQLite in a file named <tt class="docutils literal"><span class="pre">local.db</span></tt>.
+To change this, edit <tt class="docutils literal"><span class="pre">project_name/development.py</span></tt>.</p>
+<p>Configure the database:</p>
+<div class="highlight-python"><pre>$ cd ..
+$ python manage.py syncdb</pre>
+</div>
+<p>Run the development server:</p>
+<div class="highlight-python"><pre>$ python manage.py runserver</pre>
+</div>
+<p>Your project should now be available at <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/</span></tt>.</p>
+</div>
+<div class="section" id="development-workflow">
+<h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>$ cd /path/to/virtualenv/
+$ workon project_name
+$ cd src/project_name
+$ git pull origin master # Pull changes
+$ python manage.py runserver
+... # Make changes
+$ git commit -am "Description of changes"
+$ git push origin master</pre>
+</div>
+<!-- TODO fab? --><p>When adding an app, create the initial schema migration with South:</p>
+<div class="highlight-python"><pre>$ python manage.py app_name --initial</pre>
+</div>
+<p>When updating an app&#8217;s models, use South to migrate the database schema:</p>
+<div class="highlight-python"><pre>$ python manage.py schemamigration app_name --auto
+$ python manage.py migrate app_name</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Development</a><ul>
+<li><a class="reference internal" href="#configure-virtualenv">Configure Virtualenv</a></li>
+<li><a class="reference internal" href="#create-new-django-project">Create New Django Project</a></li>
+<li><a class="reference internal" href="#initialize-repository">Initialize Repository</a></li>
+<li><a class="reference internal" href="#configure-development-settings">Configure Development Settings</a></li>
+<li><a class="reference internal" href="#development-workflow">Development Workflow</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="staging.html"
+                        title="next chapter">Staging</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/development.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="staging.html" title="Staging"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             >previous</a> |</li>
+        <li><a href="index.html">django-layout 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Joseph Mornin.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+    </div>
+  </body>
+</html>
