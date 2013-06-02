@@ -1,6 +1,3 @@
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = ''
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -37,6 +34,9 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+# Make this unique, and don't share it with anybody.
+SECRET_KEY = '{{ secret_key }}'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
