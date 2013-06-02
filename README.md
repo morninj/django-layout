@@ -1,4 +1,11 @@
-This is a reusable Django project template. It uses:
+This is a reusable Django project template. These instructions explain how to 
+configure development, staging, and production environments.
+
+# Before You Start
+
+## Dependencies
+
+This configuration uses these tools:
 
 * [Ubuntu 12.04 LTS 64-bit Server](http://www.ubuntu.com/download/server)
 * [Python 2.7.3](http://www.python.org/download/releases/2.7.3/)
@@ -9,10 +16,9 @@ This is a reusable Django project template. It uses:
 * [Gunicorn 0.17.4](https://pypi.python.org/pypi/gunicorn/)
 * [MySQL 5.6.11](http://dev.mysql.com/downloads/mysql/)
 
-These instructions explain how to configure development, staging, and 
-production environments.
+You can modify this setup, but I haven't tested other configurations.
 
-# Project Settings
+## Project Settings
 
 By default, Django projects use a single settings file. This is fine for 
 development environments, but in production you'll want different settings 
@@ -60,7 +66,7 @@ To store your code on GitHub, create a new GitHub repository and then run:
     $ git remote add origin git@github.com:your_username/repo_name.git
     $ git push -u origin master
 
-This is also a good place to add a `README`.
+This is also the spot to add a `README`.
 
 ## Create New Django Project
 
