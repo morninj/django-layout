@@ -61,20 +61,22 @@ run:
     $ pip install Django==1.5.1
     $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name
 
-Install dependencies:
-
-    $ pip install -r requirements.txt
-
 To keep your virtualenv organized, rename the project directory as `src`:
 
     $ mv project_name src
     $ cd src
+    
+Install dependencies:
+
+    $ pip install -r requirements.txt
 
 ## Initialize Repository
 
 The contents of `src` should be under version control. For Git, run:
 
     $ git init
+    $ git add * .gitignore
+    $ git commit -m "Create new Django project"
 
 To store your code on GitHub, create a new GitHub repository and then run:
 
@@ -88,10 +90,22 @@ This is also the spot to add a `README`.
     $ cd project_name/project_name
     $ cp settings.py.sample settings.py
 
-By default, `settings.py` is excluded from the repository to avoid clobbering 
+`settings.py` is excluded from the repository to avoid clobbering 
 it when you sync the code across servers.
 
-<!-- TODO configure db and south -->
+The default development database is SQLite in a file named `local.db`. To 
+change this, edit `project_name/development.py`.
+
+Configure the database:
+
+    $ cd ..
+    $ python manage.py syncdb
+
+Run the development server:
+
+    $ python manage.py runserver
+
+Your project should now be available at `http://127.0.0.1:8000/`.
 
 ## Development Workflow
 
@@ -104,6 +118,15 @@ it when you sync the code across servers.
     $ git commit -am "Description of changes"
     $ git push origin master
 <!-- TODO fab? -->
+
+When adding an app, create the initial schema migration with South:
+
+    $ python manage.py app_name --initial
+
+When updating an app's models, use South to migrate the database schema:
+
+    $ python manage.py schemamigration app_name --auto
+    $ python manage.py migrate app_name
 
 # Staging
 
