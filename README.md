@@ -88,11 +88,10 @@ This is also the spot to add a `README`.
     $ cd project_name/project_name
     $ cp settings.py.sample settings.py
 
-You should exclude `settings.py` from the repository to avoid clobbering it 
-when you sync the code across servers. To do this, add `.gitignore` in your 
-project's root directory (i.e., `src/`) with this line:
+By default, `settings.py` is excluded from the repository to avoid clobbering 
+it when you sync the code across servers.
 
-    settings.py
+<!-- TODO configure db and south -->
 
 ## Development Workflow
 
