@@ -70,8 +70,12 @@ This is also the spot to add a `README`.
 
 ## Create New Django Project
 
+Make sure you're in your project's root directory (e.g., 
+`/path/to/virtualenvs/project_name/src/`). Then run:
+
     $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name
-<!-- TODO expand-->
+
+
 
 ## Configure Development Settings
 
