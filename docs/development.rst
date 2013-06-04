@@ -19,7 +19,7 @@ Next, configure your local virtualenv:
 
 ::
 
-    $ mkvirtualenv project_name
+    $ mkvirtualenv -p python2.7 project_name
     $ cd /path/to/virtualenvs/project_name
 
 Create New Django Project
