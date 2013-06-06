@@ -20,6 +20,7 @@ This configuration uses these tools:
 -  `nginx 1.4.1 <http://nginx.org/en/download.html>`__
 -  `Gunicorn 0.17.4 <https://pypi.python.org/pypi/gunicorn/>`__
 -  `MySQL 5.6.11 <http://dev.mysql.com/downloads/mysql/>`__
+- `Fabric 1.6.1 <http://docs.fabfile.org/en/1.6/>`__
 
 You can modify this setup, but I haven't tested other configurations.
 
