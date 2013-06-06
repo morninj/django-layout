@@ -10,7 +10,7 @@ STAGING_SERVER = USER + '@ec2-50-16-147-237.compute-1.amazonaws.com'
 PRODUCTION_SERVER = USER + ''
 
 # Absolute path to your private key file if needed; otherwise leave blank
-PRIVATE_KEY_FILE = '/Users/josephmornin/.aws/mornin.pem'
+PRIVATE_KEY_FILE = ''
 env.key_filename = PRIVATE_KEY_FILE
 
 # Path to store virtualenvs
@@ -19,13 +19,9 @@ VIRTUALENV_ROOT = '/var/sites/virtualenvs/'
 # Project name (should match your Django project name)
 PROJECT_NAME = '{{ project_name }}'
 
-# Source repository for committing local changes (Git)
-# Example: git@github.com:username/repo-name.git
-REPOSITORY = 'git@github.com:morninj/django-layout.git'
-
 # Read-only repository connection (for staging and production servers)
 # Example: git://github.com/username/repo-name.git
-REPOSITORY_READ_ONLY = 'git://github.com/morninj/django-layout.git'
+REPOSITORY_READ_ONLY = ''
 
 @_contextmanager
 def virtualenv():
