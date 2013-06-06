@@ -5,8 +5,8 @@ from contextlib import contextmanager as _contextmanager
 
 # Example: user@host:port -- e.g., ubuntu@nothing.com:22
 # Make sure the user has root privileges
-USER = 'ubuntu'
-STAGING_SERVER = USER + '@ec2-50-16-147-237.compute-1.amazonaws.com'
+USER = ''
+STAGING_SERVER = USER + '@host.com'
 PRODUCTION_SERVER = USER + ''
 
 # Absolute path to your private key file if needed; otherwise leave blank
@@ -16,12 +16,12 @@ env.key_filename = PRIVATE_KEY_FILE
 # Path to store virtualenvs
 VIRTUALENV_ROOT = '/var/sites/virtualenvs/'
 
-# Project name (should match your Django project name)
-PROJECT_NAME = '{{ project_name }}'
-
 # Read-only repository connection (for staging and production servers)
 # Example: git://github.com/username/repo-name.git
 REPOSITORY_READ_ONLY = ''
+
+# Project name (should match your Django project name)
+PROJECT_NAME = '{{ project_name }}'
 
 @_contextmanager
 def virtualenv():
