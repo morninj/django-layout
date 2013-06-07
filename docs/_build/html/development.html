@@ -102,9 +102,9 @@ $ git push -u origin master</pre>
 <div class="highlight-python"><pre>$ mv config.env.sample config.env</pre>
 </div>
 <p>The default settings are good for a normal development environment, but you
-may want to tweak them.</p>
-<p>Next, configure the database:</p>
-<div class="highlight-python"><pre>$ cd ..
+may want to tweak them in <tt class="docutils literal"><span class="pre">config.env</span></tt>.</p>
+<p>Next, create the local database:</p>
+<div class="highlight-python"><pre>$ cd project_name
 $ python manage.py syncdb</pre>
 </div>
 <p>Run the development server:</p>

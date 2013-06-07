@@ -54,12 +54,13 @@
 <p>First, commit all local changes to the repository.</p>
 <p>Next, launch a new staging server. On Amazon Web Services, for instance,
 launch a new EC2 instance. Remember that this configuration uses Ubuntu 12.04
-LTS 64-bit.</p>
+LTS 64-bit (though other Debian-based Linux distributions should work fine).</p>
 <div class="section" id="add-staging-settings">
 <h2>Add Staging Settings<a class="headerlink" href="#add-staging-settings" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>$ cd /path/to/virtualenvs/project_name/src/project_name</div></blockquote>
-<p>Edit the following variables in <tt class="docutils literal"><span class="pre">fabfile.py</span></tt>:</p>
+<div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name</pre>
+</div>
+<p>Edit the following variables in <tt class="docutils literal"><span class="pre">fabfile.py</span></tt> to match your deployment
+server:</p>
 <ul class="simple">
 <li><tt class="docutils literal"><span class="pre">USER</span></tt></li>
 <li><tt class="docutils literal"><span class="pre">STAGING_SERVER</span></tt></li>
@@ -71,14 +72,16 @@ LTS 64-bit.</p>
 <div class="section" id="configure-staging-server">
 <h2>Configure Staging Server<a class="headerlink" href="#configure-staging-server" title="Permalink to this headline">¶</a></h2>
 <p>Configure the server with Fabric:</p>
-<blockquote>
-<div>$ cd /path/to/virtualenvs/project_name/src/project_name
-$ fab configure_staging_server</div></blockquote>
-<p>Connect to the server via SSH and run:</p>
-<blockquote>
-<div>$ cd /path/to/virtualenvs/ # default: /var/sites/virtualenvs/
-$ cd project_name/src/project_name/project_name
-$ cp settings.sample.py settings.py</div></blockquote>
+<div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name
+$ fab configure_staging_server</pre>
+</div>
+<p>Connect to the server via SSH, create <tt class="docutils literal"><span class="pre">config.env</span></tt>, and update it with your
+deployment settings:</p>
+<div class="highlight-python"><pre>$ cd /path/to/virtualenvs/ # default: /var/sites/virtualenvs/
+$ cd project_name/src/
+$ cp config.env.sample config.env
+$ vim config.env # make any necessary changes</pre>
+</div>
 </div>
 </div>
 

@@ -78,13 +78,13 @@ Local settings live in ``config.env``. To begin, copy the sample config file:
     $ mv config.env.sample config.env
 
 The default settings are good for a normal development environment, but you 
-may want to tweak them.
+may want to tweak them in ``config.env``.
 
-Next, configure the database:
+Next, create the local database:
 
 ::
 
-    $ cd ..
+    $ cd project_name
     $ python manage.py syncdb
 
 Run the development server:
