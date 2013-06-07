@@ -68,23 +68,31 @@ run:
 
 This is also the spot to add a ``README``.
 
-Configure Development Settings
-------------------------------
+Configure Settings
+------------------
 
-Local settings live in ``config.env``. To begin, copy the sample config file:
-
-::
-
-    $ mv config.env.sample config.env
-
-The default settings are good for a normal development environment, but you 
-may want to tweak them in ``config.env``.
-
-Next, create the local database:
+Go to the settings folder:
 
 ::
 
     $ cd project_name
+
+Project-wide settings live in ``default.py``. Edit that file to match your 
+configuration. The defaults should be fine for most configurations.
+
+Development settings live in ``development.py``. The defaults should work for most development environments.
+
+Next, activate the development settings:
+
+::
+
+    $ cp settings.sample.py settings.py
+
+Create the local database:
+
+::
+
+    $ cd ..
     $ python manage.py syncdb
 
 Run the development server:

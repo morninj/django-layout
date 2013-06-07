@@ -1,5 +1,9 @@
 # Django settings for {{ project_name }} project.
 
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # Directory where settings.py lives
+PROJECT_DIR = os.path.abspath(os.path.join(BASE_DIR, '..')) # Django project root
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -63,9 +67,12 @@ ROOT_URLCONF = '{{ project_name }}.urls'
 WSGI_APPLICATION = '{{ project_name }}.wsgi.application'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    PROJECT_DIR + '/templates',
+)
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    PROJECT_DIR + '/static',
 )
 
 INSTALLED_APPS = (
