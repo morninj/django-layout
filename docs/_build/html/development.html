@@ -96,15 +96,19 @@ $ git push -u origin master</pre>
 </div>
 <p>This is also the spot to add a <tt class="docutils literal"><span class="pre">README</span></tt>.</p>
 </div>
-<div class="section" id="configure-development-settings">
-<h2>Configure Development Settings<a class="headerlink" href="#configure-development-settings" title="Permalink to this headline">¶</a></h2>
-<p>Local settings live in <tt class="docutils literal"><span class="pre">config.env</span></tt>. To begin, copy the sample config file:</p>
-<div class="highlight-python"><pre>$ mv config.env.sample config.env</pre>
+<div class="section" id="configure-settings">
+<h2>Configure Settings<a class="headerlink" href="#configure-settings" title="Permalink to this headline">¶</a></h2>
+<p>Go to the settings folder:</p>
+<div class="highlight-python"><pre>$ cd project_name</pre>
 </div>
-<p>The default settings are good for a normal development environment, but you
-may want to tweak them in <tt class="docutils literal"><span class="pre">config.env</span></tt>.</p>
-<p>Next, create the local database:</p>
-<div class="highlight-python"><pre>$ cd project_name
+<p>Project-wide settings live in <tt class="docutils literal"><span class="pre">default.py</span></tt>. Edit that file to match your
+configuration. The defaults should be fine for most configurations.</p>
+<p>Development settings live in <tt class="docutils literal"><span class="pre">development.py</span></tt>. The defaults should work for most development environments.</p>
+<p>Next, activate the development settings:</p>
+<div class="highlight-python"><pre>$ cp settings.sample.py settings.py</pre>
+</div>
+<p>Create the local database:</p>
+<div class="highlight-python"><pre>$ cd ..
 $ python manage.py syncdb</pre>
 </div>
 <p>Run the development server:</p>
@@ -145,7 +149,7 @@ $ python manage.py migrate app_name</pre>
 <li><a class="reference internal" href="#configure-virtualenv">Configure Virtualenv</a></li>
 <li><a class="reference internal" href="#create-new-django-project">Create New Django Project</a></li>
 <li><a class="reference internal" href="#initialize-repository">Initialize Repository</a></li>
-<li><a class="reference internal" href="#configure-development-settings">Configure Development Settings</a></li>
+<li><a class="reference internal" href="#configure-settings">Configure Settings</a></li>
 <li><a class="reference internal" href="#development-workflow">Development Workflow</a></li>
 </ul>
 </li>

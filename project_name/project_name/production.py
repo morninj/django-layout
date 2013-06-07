@@ -1,10 +1,10 @@
-# Settings for development server
+# Settings for production server
 
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # Directory where settings.py lives
 PROJECT_DIR = os.path.abspath(os.path.join(BASE_DIR, '..')) # Django project root
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
@@ -20,7 +20,7 @@ DATABASES = {
 }
 
 ALLOWED_HOSTS = []
-MEDIA_ROOT = '/var/tmp/'
+MEDIA_ROOT = '/var/sites/virtualenvs/{{ project_name }}/media/'
 MEDIA_URL = '/media/'
-STATIC_ROOT = ''
+STATIC_ROOT = '/var/sites/virtualenvs/{{ project_name }}/static/'
 STATIC_URL = '/static/'

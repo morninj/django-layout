@@ -55,8 +55,10 @@
 <p>Next, launch a new staging server. On Amazon Web Services, for instance,
 launch a new EC2 instance. Remember that this configuration uses Ubuntu 12.04
 LTS 64-bit (though other Debian-based Linux distributions should work fine).</p>
-<div class="section" id="add-staging-settings">
-<h2>Add Staging Settings<a class="headerlink" href="#add-staging-settings" title="Permalink to this headline">¶</a></h2>
+<p>The staging server will be almost identical to the production server. Most of
+the settings below will also apply in production.</p>
+<div class="section" id="edit-configuration-settings">
+<h2>Edit Configuration Settings<a class="headerlink" href="#edit-configuration-settings" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name</pre>
 </div>
 <p>Edit the following variables in <tt class="docutils literal"><span class="pre">fabfile.py</span></tt> to match your deployment
@@ -68,6 +70,17 @@ server:</p>
 <li><tt class="docutils literal"><span class="pre">VIRTUALENV_ROOT</span></tt></li>
 <li><tt class="docutils literal"><span class="pre">REPOSITORY_READ_ONLY</span></tt></li>
 </ul>
+<p># TODO see <a class="reference external" href="http://senko.net/en/django-nginx-gunicorn/">http://senko.net/en/django-nginx-gunicorn/</a></p>
+<p>Next, move up one directory and edit the configuration file for nginx</p>
+<div class="highlight-python"><pre>$ cd ..
+$ vim nginx.conf</pre>
+</div>
+<p>Next, edit the shell script to launch the Gunicorn process:</p>
+<div class="highlight-python"><pre>$ vim launch.sh</pre>
+</div>
+<p>Finally, edit the Upstart config file to launch Gunicorn on boot:</p>
+<blockquote>
+<div>$ vim project_name.conf</div></blockquote>
 </div>
 <div class="section" id="configure-staging-server">
 <h2>Configure Staging Server<a class="headerlink" href="#configure-staging-server" title="Permalink to this headline">¶</a></h2>
@@ -94,7 +107,7 @@ $ vim config.env # make any necessary changes</pre>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Staging</a><ul>
-<li><a class="reference internal" href="#add-staging-settings">Add Staging Settings</a></li>
+<li><a class="reference internal" href="#edit-configuration-settings">Edit Configuration Settings</a></li>
 <li><a class="reference internal" href="#configure-staging-server">Configure Staging Server</a></li>
 </ul>
 </li>
