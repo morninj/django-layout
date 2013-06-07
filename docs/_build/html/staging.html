@@ -61,15 +61,12 @@ the settings below will also apply in production.</p>
 <h2>Edit Configuration Settings<a class="headerlink" href="#edit-configuration-settings" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name</pre>
 </div>
-<p>Edit the following variables in <tt class="docutils literal"><span class="pre">fabfile.py</span></tt> to match your deployment
-server:</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">USER</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">STAGING_SERVER</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">PRIVATE_KEY_FILE</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">VIRTUALENV_ROOT</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">REPOSITORY_READ_ONLY</span></tt></li>
-</ul>
+<p>Edit the settings in <tt class="docutils literal"><span class="pre">production_config.py</span></tt> to match the settings for your staging
+server.</p>
+<p>Next, change to the settings directory:</p>
+<div class="highlight-python"><pre>$ cd project_name</pre>
+</div>
+<p>Edit your staging/production settings in <tt class="docutils literal"><span class="pre">production.py</span></tt>.</p>
 <p># TODO see <a class="reference external" href="http://senko.net/en/django-nginx-gunicorn/">http://senko.net/en/django-nginx-gunicorn/</a></p>
 <p>Next, move up one directory and edit the configuration file for nginx</p>
 <div class="highlight-python"><pre>$ cd ..
@@ -87,13 +84,6 @@ $ vim nginx.conf</pre>
 <p>Configure the server with Fabric:</p>
 <div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name
 $ fab configure_staging_server</pre>
-</div>
-<p>Connect to the server via SSH, create <tt class="docutils literal"><span class="pre">config.env</span></tt>, and update it with your
-deployment settings:</p>
-<div class="highlight-python"><pre>$ cd /path/to/virtualenvs/ # default: /var/sites/virtualenvs/
-$ cd project_name/src/
-$ cp config.env.sample config.env
-$ vim config.env # make any necessary changes</pre>
 </div>
 </div>
 </div>

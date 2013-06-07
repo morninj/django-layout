@@ -17,14 +17,16 @@ Edit Configuration Settings
 
     $ cd /path/to/virtualenvs/project_name/src/project_name
 
-Edit the following variables in ``fabfile.py`` to match your deployment 
-server:
+Edit the settings in ``production_config.py`` to match the settings for your staging 
+server.
 
--  ``USER``
--  ``STAGING_SERVER``
--  ``PRIVATE_KEY_FILE``
--  ``VIRTUALENV_ROOT``
--  ``REPOSITORY_READ_ONLY``
+Next, change to the settings directory:
+
+::
+
+    $ cd project_name
+
+Edit your staging/production settings in ``production.py``.
 
 # TODO see http://senko.net/en/django-nginx-gunicorn/
 
@@ -55,15 +57,3 @@ Configure the server with Fabric:
 
     $ cd /path/to/virtualenvs/project_name/src/project_name
     $ fab configure_staging_server
-
-Connect to the server via SSH, create ``config.env``, and update it with your 
-deployment settings:
-
-::
-
-    $ cd /path/to/virtualenvs/ # default: /var/sites/virtualenvs/
-    $ cd project_name/src/
-    $ cp config.env.sample config.env
-    $ vim config.env # make any necessary changes
-
-
