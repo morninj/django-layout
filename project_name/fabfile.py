@@ -41,8 +41,7 @@ def configure_staging_server():
         '~/.bash_profile')
     run('sudo mkdir -p ' + VIRTUALENV_ROOT)
     run('sudo chown ' + USER + ' ' + VIRTUALENV_ROOT)
-    run('source ~/.bash_profile')
-    run('mkvirtualenv ' + PROJECT_NAME)
+    run('sudo mkvirtualenv ' + PROJECT_NAME)
     with virtualenv():
         with cd(VIRTUALENV_ROOT + PROJECT_NAME):
             run('mkdir static')
