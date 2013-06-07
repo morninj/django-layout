@@ -51,7 +51,36 @@
             
   <div class="section" id="staging">
 <h1>Staging<a class="headerlink" href="#staging" title="Permalink to this headline">¶</a></h1>
-<!-- TODO --></div>
+<p>First, commit all local changes to the repository.</p>
+<p>Next, launch a new staging server. On Amazon Web Services, for instance,
+launch a new EC2 instance. Remember that this configuration uses Ubuntu 12.04
+LTS 64-bit.</p>
+<div class="section" id="add-staging-settings">
+<h2>Add Staging Settings<a class="headerlink" href="#add-staging-settings" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>$ cd /path/to/virtualenvs/project_name/src/project_name</div></blockquote>
+<p>Edit the following variables in <tt class="docutils literal"><span class="pre">fabfile.py</span></tt>:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">USER</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">STAGING_SERVER</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">PRIVATE_KEY_FILE</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">VIRTUALENV_ROOT</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">REPOSITORY_READ_ONLY</span></tt></li>
+</ul>
+</div>
+<div class="section" id="configure-staging-server">
+<h2>Configure Staging Server<a class="headerlink" href="#configure-staging-server" title="Permalink to this headline">¶</a></h2>
+<p>Configure the server with Fabric:</p>
+<blockquote>
+<div>$ cd /path/to/virtualenvs/project_name/src/project_name
+$ fab configure_staging_server</div></blockquote>
+<p>Connect to the server via SSH and run:</p>
+<blockquote>
+<div>$ cd /path/to/virtualenvs/ # default: /var/sites/virtualenvs/
+$ cd project_name/src/project_name/project_name
+$ cp settings.sample.py settings.py</div></blockquote>
+</div>
+</div>
 
 
           </div>
@@ -59,6 +88,15 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Staging</a><ul>
+<li><a class="reference internal" href="#add-staging-settings">Add Staging Settings</a></li>
+<li><a class="reference internal" href="#configure-staging-server">Configure Staging Server</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="development.html"
                         title="previous chapter">Development</a></p>

@@ -3,6 +3,10 @@ Staging
 
 First, commit all local changes to the repository.
 
+Next, launch a new staging server. On Amazon Web Services, for instance, 
+launch a new EC2 instance. Remember that this configuration uses Ubuntu 12.04 
+LTS 64-bit.
+
 Add Staging Settings
 --------------------
 
@@ -20,5 +24,15 @@ Edit the following variables in ``fabfile.py``:
 Configure Staging Server
 ------------------------
 
+Configure the server with Fabric:
+
     $ cd /path/to/virtualenvs/project_name/src/project_name
-    $ 
+    $ fab configure_staging_server
+
+Connect to the server via SSH and run:
+
+    $ cd /path/to/virtualenvs/ # default: /var/sites/virtualenvs/
+    $ cd project_name/src/project_name/project_name
+    $ cp settings.sample.py settings.py
+
+

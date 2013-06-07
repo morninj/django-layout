@@ -71,18 +71,16 @@ This is also the spot to add a ``README``.
 Configure Development Settings
 ------------------------------
 
+Local settings live in ``config.env``. To begin, copy the sample config file:
+
 ::
 
-    $ cd project_name/project_name
-    $ cp settings.py.sample settings.py
+    $ mv config.env.sample config.env
 
-``settings.py`` is excluded from the repository to avoid clobbering it
-when you sync the code across servers.
+The default settings are good for a normal development environment, but you 
+may want to tweak them.
 
-The default development database is SQLite in a file named ``local.db``.
-To change this, edit ``project_name/development.py``.
-
-Configure the database:
+Next, configure the database:
 
 ::
 
@@ -110,10 +108,6 @@ Development Workflow
     ... # Make changes
     $ git commit -am "Description of changes"
     $ git push origin master
-
-.. raw:: html
-
-   <!-- TODO fab? -->
 
 When adding an app, create the initial schema migration with South:
 

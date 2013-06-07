@@ -45,7 +45,9 @@ def configure_staging_server():
     run('mkvirtualenv ' + PROJECT_NAME)
     with virtualenv():
         with cd(VIRTUALENV_ROOT + PROJECT_NAME):
-            run('mkdir static; mkdir media; mkdir logs')
+            run('mkdir static')
+            run('mkdir media')
+            run('mkdir logs')
             run('git clone ' + REPOSITORY_READ_ONLY + ' ' + VIRTUALENV_ROOT + 
                 PROJECT_NAME + '/src')
         with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src'):
