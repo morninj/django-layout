@@ -31,7 +31,7 @@ By default, Django projects use a single settings file. This is fine for
 development environments, but in production you'll want different
 settings (for instance, to set ``Debug = False``).
 
-In this configuration, project-wide settings live in ``settings.py`` and 
+In this configuration, project-wide settings live in ``default.py`` and 
 settings for specific enviroments (development, staging, and production) live 
-in ``config.env``. The instructions below explain how to configure settings 
-for each environment.
+in ``development.py`` and ``production.py``. The instructions below explain 
+how to configure settings for each environment.
