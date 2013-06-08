@@ -8,9 +8,9 @@ PRODUCTION_SERVER = USER + '@' + PRODUCTION_SERVER_HOST
 
 @hosts(STAGING_SERVER)
 def configure_staging_server():
-    configure_server()
+    configure_server('staging')
 
-def configure_server():
+def configure_server(deploy):
     sudo('apt-get update -y')
     sudo('apt-get install git nginx python-setuptools python-dev -y')
     # TODO: move package list to production_config.py
@@ -44,12 +44,16 @@ def configure_server():
                     # Set permissions on the launch shell script
                     sudo('chmod ug+x launch.sh')
                     # Enable nginx conf
-                    sudo('ln -s ' + VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + 
-                    PROJECT_NAME + '/conf/nginx.staging.conf ' + \
-                    '/etc/nginx/sites-enabled/' + PROJECT_NAME + '.conf')
-                    sudo('ln -s ' + VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + 
-                    PROJECT_NAME + '/conf/nginx.production.conf ' + \
-                    '/etc/nginx/sites-enabled/' + PROJECT_NAME + '.conf')
+                    if deploy is 'staging':
+                        sudo('ln -s ' + VIRTUALENV_ROOT + PROJECT_NAME \
+                        + '/src/' + PROJECT_NAME + \
+                        '/conf/nginx.staging.conf ' + \
+                        '/etc/nginx/sites-enabled/' + PROJECT_NAME + '.conf')
+                    else:
+                        sudo('ln -s ' + VIRTUALENV_ROOT + PROJECT_NAME + \
+                        '/src/' + PROJECT_NAME + \
+                        '/conf/nginx.production.conf ' \
+                        + '/etc/nginx/sites-enabled/' + PROJECT_NAME + '.conf')
                     # Enable Upstart service
                     sudo('cp ' + VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + 
                     PROJECT_NAME + '/conf/livesite.conf ' + \

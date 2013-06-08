@@ -42,6 +42,8 @@ Edit the following files and make sure the values are correct:
 -  ``launch.sh``: a shell script to launch the Gunicorn server
 -  ``livesite.conf``: an Upstart configuration to launch Gunicorn on boot
 
+Commit your changes and push them to the repository.
+
 Configure Staging Server
 ------------------------
 
