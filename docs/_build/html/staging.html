@@ -53,40 +53,38 @@
 <h1>Staging<a class="headerlink" href="#staging" title="Permalink to this headline">¶</a></h1>
 <p>First, commit all local changes to the repository.</p>
 <p>Next, launch a new staging server. On Amazon Web Services, for instance,
-launch a new EC2 instance. Remember that this configuration uses Ubuntu 12.04
-LTS 64-bit (though other Debian-based Linux distributions should work fine).</p>
+launch a new EC2 instance. Remember that this configuration uses Ubuntu Server
+12.04 LTS 64-bit (though other Debian-based Linux distributions should work
+fine).</p>
 <p>The staging server will be almost identical to the production server. Most of
 the settings below will also apply in production.</p>
 <div class="section" id="edit-configuration-settings">
 <h2>Edit Configuration Settings<a class="headerlink" href="#edit-configuration-settings" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name</pre>
+<p>Change to the settings directory:</p>
+<div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name/project_name</pre>
 </div>
-<p>Edit the settings in <tt class="docutils literal"><span class="pre">production_config.py</span></tt> to match the settings for your staging
+<p>Edit the settings in <tt class="docutils literal"><span class="pre">production.py</span></tt> to match the settings for your staging
 server.</p>
-<p>Next, change to the settings directory:</p>
-<div class="highlight-python"><pre>$ cd project_name</pre>
+<p>Next, change to the <tt class="docutils literal"><span class="pre">conf</span></tt> directory:</p>
+<div class="highlight-python"><pre>$ cd ../conf</pre>
 </div>
-<p>Edit your staging/production settings in <tt class="docutils literal"><span class="pre">production.py</span></tt>.</p>
-<p># TODO see <a class="reference external" href="http://senko.net/en/django-nginx-gunicorn/">http://senko.net/en/django-nginx-gunicorn/</a></p>
-<p>Next, move up one directory and edit the configuration file for nginx</p>
-<div class="highlight-python"><pre>$ cd ..
-$ vim nginx.conf</pre>
-</div>
-<p>Next, edit the shell script to launch the Gunicorn process:</p>
-<div class="highlight-python"><pre>$ vim launch.sh
-TODO: change user
-TODO: chmod ug+x on staging/production</pre>
-</div>
-<p>Finally, edit the Upstart config file to launch Gunicorn on boot:</p>
-<blockquote>
-<div>$ vim project_name.conf</div></blockquote>
+<p>Edit the following files and make sure the values are correct:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">production.py</span></tt>: production deployment configuration</li>
+<li><tt class="docutils literal"><span class="pre">nginx.conf</span></tt>: nginx virtual host configuration</li>
+<li><tt class="docutils literal"><span class="pre">launch.sh</span></tt>: a shell script to launch the Gunicorn server</li>
+<li><tt class="docutils literal"><span class="pre">project_name.conf</span></tt>: an Upstart configuration to launch Gunicorn on boot</li>
+</ul>
 </div>
 <div class="section" id="configure-staging-server">
 <h2>Configure Staging Server<a class="headerlink" href="#configure-staging-server" title="Permalink to this headline">¶</a></h2>
-<p>Configure the server with Fabric:</p>
-<div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name
+<p>Once you&#8217;ve specified the settings above, Fabric will automatically configure
+the server environment. To configure the staging server, run:</p>
+<div class="highlight-python"><pre>$ cd .. # you should now be in the same directory as fabfile.py
 $ fab configure_staging_server</pre>
 </div>
+<p>Fabric will show the output of each command. You may be prompted for passwords
+(e.g., to log into the server or to clone the repository).</p>
 </div>
 </div>
 

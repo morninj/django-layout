@@ -4,8 +4,9 @@ Staging
 First, commit all local changes to the repository.
 
 Next, launch a new staging server. On Amazon Web Services, for instance, 
-launch a new EC2 instance. Remember that this configuration uses Ubuntu 12.04 
-LTS 64-bit (though other Debian-based Linux distributions should work fine).
+launch a new EC2 instance. Remember that this configuration uses Ubuntu Server 
+12.04 LTS 64-bit (though other Debian-based Linux distributions should work 
+fine).
 
 The staging server will be almost identical to the production server. Most of 
 the settings below will also apply in production.
@@ -13,49 +14,38 @@ the settings below will also apply in production.
 Edit Configuration Settings
 ---------------------------
 
+Change to the settings directory:
+
 ::
 
-    $ cd /path/to/virtualenvs/project_name/src/project_name
+    $ cd /path/to/virtualenvs/project_name/src/project_name/project_name
 
-Edit the settings in ``production_config.py`` to match the settings for your staging 
+Edit the settings in ``production.py`` to match the settings for your staging 
 server.
 
-Next, change to the settings directory:
+Next, change to the ``conf`` directory:
 
 ::
 
-    $ cd project_name
+    $ cd ../conf
 
-Edit your staging/production settings in ``production.py``.
+Edit the following files and make sure the values are correct:
 
-# TODO see http://senko.net/en/django-nginx-gunicorn/
-
-Next, move up one directory and edit the configuration file for nginx 
-
-::
-
-    $ cd ..
-    $ vim nginx.conf
-
-Next, edit the shell script to launch the Gunicorn process:
-
-::
-
-    $ vim launch.sh
-    TODO: change user
-    TODO: chmod ug+x on staging/production
-
-Finally, edit the Upstart config file to launch Gunicorn on boot:
-
-    $ vim project_name.conf
-
+-  ``production.py``: production deployment configuration
+-  ``nginx.conf``: nginx virtual host configuration
+-  ``launch.sh``: a shell script to launch the Gunicorn server
+- ``project_name.conf``: an Upstart configuration to launch Gunicorn on boot
 
 Configure Staging Server
 ------------------------
 
-Configure the server with Fabric:
+Once you've specified the settings above, Fabric will automatically configure 
+the server environment. To configure the staging server, run:
 
 ::
 
-    $ cd /path/to/virtualenvs/project_name/src/project_name
+    $ cd .. # you should now be in the same directory as fabfile.py
     $ fab configure_staging_server
+
+Fabric will show the output of each command. You may be prompted for passwords 
+(e.g., to log into the server or to clone the repository).
