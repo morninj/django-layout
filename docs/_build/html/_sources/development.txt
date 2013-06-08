@@ -36,6 +36,8 @@ First, install Django 1.5.1:
 Next, create a new Django project based on the ``django-layout`` template 
 (replacing ``project_name`` with the name of your project):
 
+::
+
     $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip --extension=py,sh,conf project_name
 
 To keep your virtualenv organized, rename the project directory as

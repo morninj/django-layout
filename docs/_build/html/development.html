@@ -74,8 +74,8 @@ $ cd /path/to/virtualenvs/project_name</pre>
 </div>
 <p>Next, create a new Django project based on the <tt class="docutils literal"><span class="pre">django-layout</span></tt> template
 (replacing <tt class="docutils literal"><span class="pre">project_name</span></tt> with the name of your project):</p>
-<blockquote>
-<div>$ django-admin.py startproject &#8211;template=https://github.com/morninj/django-layout/archive/master.zip &#8211;extension=py,sh,conf project_name</div></blockquote>
+<div class="highlight-python"><pre>$ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip --extension=py,sh,conf project_name</pre>
+</div>
 <p>To keep your virtualenv organized, rename the project directory as
 <tt class="docutils literal"><span class="pre">src</span></tt>:</p>
 <div class="highlight-python"><pre>$ mv project_name src
