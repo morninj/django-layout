@@ -23,7 +23,7 @@ def configure_server():
     sudo('chown ' + USER + ' ' + VIRTUALENV_ROOT)
     with prefix('WORKON_HOME=' + VIRTUALENV_ROOT):
         with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
-            # sudo('mkvirtualenv ' + PROJECT_NAME)
+            sudo('mkvirtualenv ' + PROJECT_NAME)
             with prefix('workon ' + PROJECT_NAME): 
                 with cd(VIRTUALENV_ROOT + PROJECT_NAME):
                     # Add directories for static, media, logs
