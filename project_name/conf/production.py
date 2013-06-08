@@ -7,11 +7,11 @@ PRODUCTION_SERVER_HOST = '' # E.g., www.yoursite.com
 # Absolute path to your private key file if needed; otherwise leave blank
 PRIVATE_KEY_FILE = '' # e.g., /path/to/key.pem
 
-# Read-only repository connection
+# Version control repository connection
 # E.g., git://github.com/username/repo-name.git
 # Must be public or accessible with a username/password; public key 
 # authentication is not currently supported
-REPOSITORY_READ_ONLY = ''
+REPOSITORY = ''
 
 # Path to store virtualenvs; best to leave this as the default
 VIRTUALENV_ROOT = '/var/sites/virtualenvs/'

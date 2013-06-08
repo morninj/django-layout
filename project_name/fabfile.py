@@ -31,7 +31,7 @@ def configure_server():
                     sudo('mkdir media')
                     sudo('mkdir logs')
                     # Clone repository
-                    sudo('git clone ' + REPOSITORY_READ_ONLY + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + '/src')
+                    sudo('git clone ' + REPOSITORY + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + '/src')
                 with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src'):
                     # Install pip requirements
                     sudo('pip install -r requirements.txt')
