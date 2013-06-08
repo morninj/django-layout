@@ -25,13 +25,18 @@ Next, configure your local virtualenv:
 Create New Django Project
 -------------------------
 
-Make sure you're in directory and that the virtualenv is activated. Then
-run:
+Make sure you're in directory and that the virtualenv is activated.
+
+First, install Django 1.5.1:
 
 ::
 
     $ pip install Django==1.5.1
-    $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name
+
+Next, create a new Django project based on the ``django-layout`` template 
+(replacing ``project_name`` with the name of your project):
+
+    $ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip --extension=py,sh,conf project_name
 
 To keep your virtualenv organized, rename the project directory as
 ``src``:

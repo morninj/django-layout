@@ -68,11 +68,14 @@ $ cd /path/to/virtualenvs/project_name</pre>
 </div>
 <div class="section" id="create-new-django-project">
 <h2>Create New Django Project<a class="headerlink" href="#create-new-django-project" title="Permalink to this headline">¶</a></h2>
-<p>Make sure you&#8217;re in directory and that the virtualenv is activated. Then
-run:</p>
-<div class="highlight-python"><pre>$ pip install Django==1.5.1
-$ django-admin.py startproject --template=https://github.com/morninj/django-layout/archive/master.zip project_name</pre>
+<p>Make sure you&#8217;re in directory and that the virtualenv is activated.</p>
+<p>First, install Django 1.5.1:</p>
+<div class="highlight-python"><pre>$ pip install Django==1.5.1</pre>
 </div>
+<p>Next, create a new Django project based on the <tt class="docutils literal"><span class="pre">django-layout</span></tt> template
+(replacing <tt class="docutils literal"><span class="pre">project_name</span></tt> with the name of your project):</p>
+<blockquote>
+<div>$ django-admin.py startproject &#8211;template=https://github.com/morninj/django-layout/archive/master.zip &#8211;extension=py,sh,conf project_name</div></blockquote>
 <p>To keep your virtualenv organized, rename the project directory as
 <tt class="docutils literal"><span class="pre">src</span></tt>:</p>
 <div class="highlight-python"><pre>$ mv project_name src
