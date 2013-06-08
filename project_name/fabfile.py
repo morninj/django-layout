@@ -20,7 +20,6 @@ def configure_server():
     run('echo "source /usr/local/bin/virtualenvwrapper.sh" >> ' \
         '~/.bash_profile')
     sudo('mkdir -p ' + VIRTUALENV_ROOT)
-    sudo('chown ' + USER + ' ' + VIRTUALENV_ROOT)
     with prefix('WORKON_HOME=' + VIRTUALENV_ROOT):
         with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
             sudo('mkvirtualenv ' + PROJECT_NAME)
@@ -62,6 +61,7 @@ def configure_server():
                     # Collect static files
                     sudo('../../bin/python2.* manage.py collectstatic')
                 sudo('service nginx restart')
+                # TODO: set proper file permissions
 
 # TODO: update server
 
