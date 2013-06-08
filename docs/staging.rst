@@ -42,6 +42,8 @@ Next, edit the shell script to launch the Gunicorn process:
 ::
 
     $ vim launch.sh
+    TODO: change user
+    TODO: chmod ug+x on staging/production
 
 Finally, edit the Upstart config file to launch Gunicorn on boot:
 

@@ -73,7 +73,9 @@ server.</p>
 $ vim nginx.conf</pre>
 </div>
 <p>Next, edit the shell script to launch the Gunicorn process:</p>
-<div class="highlight-python"><pre>$ vim launch.sh</pre>
+<div class="highlight-python"><pre>$ vim launch.sh
+TODO: change user
+TODO: chmod ug+x on staging/production</pre>
 </div>
 <p>Finally, edit the Upstart config file to launch Gunicorn on boot:</p>
 <blockquote>
