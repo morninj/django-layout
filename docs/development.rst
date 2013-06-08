@@ -75,7 +75,7 @@ Go to the settings folder:
 
 ::
 
-    $ cd project_name
+    $ cd project_name/project_name
 
 Project-wide settings live in ``default.py``. Edit that file to match your 
 configuration. The defaults should be fine for most configurations.
