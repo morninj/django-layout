@@ -32,9 +32,9 @@ Next, change to the ``conf`` directory:
 Edit the following files and make sure the values are correct:
 
 -  ``production.py``: production deployment configuration
--  ``nginx.conf``: nginx virtual host configuration
+-  ``nginx.staging.conf``: nginx virtual host configuration
 -  ``launch.sh``: a shell script to launch the Gunicorn server
-- ``project_name.conf``: an Upstart configuration to launch Gunicorn on boot
+-  ``livesite.conf``: an Upstart configuration to launch Gunicorn on boot
 
 Configure Staging Server
 ------------------------
