@@ -36,6 +36,7 @@ NGINX = True
 MYSQL = True
 PHP = True
 WORDPRESS = True
+APT_PACKAGES = 'git python-setuptools python-dev'
 
 # Install security tools?
 SECURITY_TOOLS = True

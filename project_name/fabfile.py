@@ -19,11 +19,8 @@ def configure_production():
 
 def configure_server(deploy):
     sudo('apt-get update -y && apt-get upgrade -y')
-    # TODO move nginx to separate function
-    # TODO packages to list in production.py
+    sudo('apt-get install ' + APT_PACKAGES + ' -y')
     if NGINX: install_nginx()
-    sudo('apt-get install git python-setuptools python-dev -y')
-    # TODO: move package list to production_config.py
     if ADD_NEW_USER: add_new_user()
     if SECURITY_TOOLS: install_security_tools()
     sudo('easy_install pip')
