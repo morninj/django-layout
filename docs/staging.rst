@@ -5,7 +5,7 @@ First, commit all local changes to the repository.
 
 Next, launch a new staging server. On Amazon Web Services, for instance, 
 launch a new EC2 instance. Remember that this configuration uses Ubuntu Server 
-12.04 LTS 64-bit (though other Debian-based Linux distributions should work 
+12.04.03 LTS 64-bit (though other Debian-based Linux distributions should work 
 fine).
 
 The staging server will be almost identical to the production server. Most of 
