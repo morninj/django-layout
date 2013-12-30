@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Staging &mdash; django-layout 0.1 documentation</title>
+    <title>Staging Configuration &mdash; django-layout 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="django-layout 0.1 documentation" href="index.html" />
-    <link rel="next" title="Production" href="production.html" />
+    <link rel="next" title="Production Configuration" href="production.html" />
     <link rel="prev" title="Development" href="development.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="production.html" title="Production"
+          <a href="production.html" title="Production Configuration"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="development.html" title="Development"
@@ -49,8 +49,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="staging">
-<h1>Staging<a class="headerlink" href="#staging" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="staging-configuration">
+<h1>Staging Configuration<a class="headerlink" href="#staging-configuration" title="Permalink to this headline">¶</a></h1>
 <p>First, commit all local changes to the repository.</p>
 <p>Next, launch a new staging server. On Amazon Web Services, for instance,
 launch a new EC2 instance. Remember that this configuration uses Ubuntu Server
@@ -92,6 +92,30 @@ $ fab configure_staging_server</pre>
 <p>Fabric will show the output of each command. You may be prompted for passwords
 (e.g., to log into the server or to clone the repository).</p>
 </div>
+<div class="section" id="verify">
+<h2>Verify<a class="headerlink" href="#verify" title="Permalink to this headline">¶</a></h2>
+<p>Navigate to the staging server address. If you see &#8220;Bad Request (400)&#8221;, it&#8217;s
+probably because <tt class="docutils literal"><span class="pre">ALLOWED_HOSTS</span></tt> is set incorrectly. Make sure your domain
+is in <tt class="docutils literal"><span class="pre">ALLOWED_HOSTS</span></tt> in <tt class="docutils literal"><span class="pre">src/project_name/project_name/production.py</span></tt>.</p>
+<p>If you see <tt class="docutils literal"><span class="pre">The</span> <span class="pre">requested</span> <span class="pre">URL</span> <span class="pre">/</span> <span class="pre">was</span> <span class="pre">not</span> <span class="pre">found</span> <span class="pre">on</span> <span class="pre">this</span> <span class="pre">server.</span></tt>, it&#8217;s
+probably because Django cannot find a matching URL at the path <tt class="docutils literal"><span class="pre">/</span></tt>. This can
+happen if you start with an empty Django project with no views. To fix this,
+add a view in <tt class="docutils literal"><span class="pre">src/testproject/testproject/views.py</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+
+<span class="k">def</span> <span class="nf">hello_world</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s">&#39;Hello, world!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And in <tt class="docutils literal"><span class="pre">src/testproject/testproject/urls.py</span></tt>, add this line to your
+<tt class="docutils literal"><span class="pre">urlpatterns</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^$&#39;</span><span class="p">,</span> <span class="s">&#39;testproject.views.hello_world&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;home&#39;</span><span class="p">),</span>
+</pre></div>
+</div>
+<p>To make updates to the staging server, run:</p>
+<div class="highlight-python"><pre>$ fab deploy_staging</pre>
+</div>
+</div>
 </div>
 
 
@@ -102,9 +126,10 @@ $ fab configure_staging_server</pre>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Staging</a><ul>
+<li><a class="reference internal" href="#">Staging Configuration</a><ul>
 <li><a class="reference internal" href="#edit-configuration-settings">Edit Configuration Settings</a></li>
 <li><a class="reference internal" href="#configure-staging-server">Configure Staging Server</a></li>
+<li><a class="reference internal" href="#verify">Verify</a></li>
 </ul>
 </li>
 </ul>
@@ -114,7 +139,7 @@ $ fab configure_staging_server</pre>
                         title="previous chapter">Development</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="production.html"
-                        title="next chapter">Production</a></p>
+                        title="next chapter">Production Configuration</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/staging.txt"
@@ -144,7 +169,7 @@ $ fab configure_staging_server</pre>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="production.html" title="Production"
+          <a href="production.html" title="Production Configuration"
              >next</a> |</li>
         <li class="right" >
           <a href="development.html" title="Development"

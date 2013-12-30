@@ -1,5 +1,5 @@
-Staging
-=======
+Staging Configuration
+=====================
 
 First, commit all local changes to the repository.
 
@@ -64,3 +64,28 @@ Verify
 Navigate to the staging server address. If you see "Bad Request (400)", it's 
 probably because ``ALLOWED_HOSTS`` is set incorrectly. Make sure your domain 
 is in ``ALLOWED_HOSTS`` in ``src/project_name/project_name/production.py``.
+
+If you see ``The requested URL / was not found on this server.``, it's 
+probably because Django cannot find a matching URL at the path ``/``. This can 
+happen if you start with an empty Django project with no views. To fix this, 
+add a view in ``src/testproject/testproject/views.py``:
+
+::
+
+    from django.http import HttpResponse
+
+    def hello_world(request):
+        return HttpResponse('Hello, world!')
+
+And in ``src/testproject/testproject/urls.py``, add this line to your 
+``urlpatterns``:
+
+::
+
+    url(r'^$', 'testproject.views.hello_world', name='home'),
+
+To make updates to the staging server, run:
+
+::
+
+    $ fab deploy_staging

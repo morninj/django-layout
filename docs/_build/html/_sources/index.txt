@@ -15,6 +15,7 @@ Contents:
    development
    staging
    production
+   workflow
    credits
 
 Indices and tables

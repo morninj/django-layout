@@ -111,29 +111,3 @@ Run the development server:
 
 Your project should now be available at ``http://127.0.0.1:8000/``.
 
-Development Workflow
---------------------
-
-::
-
-    $ cd /path/to/virtualenv/
-    $ workon project_name
-    $ cd src/project_name
-    $ git pull origin master # Pull changes
-    $ python manage.py runserver
-    ... # Make changes
-    $ git commit -am "Description of changes"
-    $ git push origin master
-
-When adding an app, create the initial schema migration with South:
-
-::
-
-    $ python manage.py app_name --initial
-
-When updating an app's models, use South to migrate the database schema:
-
-::
-
-    $ python manage.py schemamigration app_name --auto
-    $ python manage.py migrate app_name

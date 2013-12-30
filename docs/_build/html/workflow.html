@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Production Configuration &mdash; django-layout 0.1 documentation</title>
+    <title>Workflow &mdash; django-layout 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,8 +24,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="django-layout 0.1 documentation" href="index.html" />
-    <link rel="next" title="Workflow" href="workflow.html" />
-    <link rel="prev" title="Staging Configuration" href="staging.html" /> 
+    <link rel="next" title="Credits" href="credits.html" />
+    <link rel="prev" title="Production Configuration" href="production.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,10 +35,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="workflow.html" title="Workflow"
+          <a href="credits.html" title="Credits"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="staging.html" title="Staging Configuration"
+          <a href="production.html" title="Production Configuration"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">django-layout 0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -49,9 +49,37 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="production-configuration">
-<h1>Production Configuration<a class="headerlink" href="#production-configuration" title="Permalink to this headline">¶</a></h1>
-<!-- TODO --></div>
+  <div class="section" id="workflow">
+<h1>Workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="development">
+<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>$ cd /path/to/virtualenv/
+$ workon project_name
+$ cd src/project_name
+$ git pull origin master # Pull changes
+$ python manage.py runserver
+... # Make changes
+$ git commit -am "Description of changes"
+$ git push origin master</pre>
+</div>
+<p>When adding an app, create the initial schema migration with South:</p>
+<div class="highlight-python"><pre>$ python manage.py app_name --initial</pre>
+</div>
+<p>When updating an app&#8217;s models, use South to migrate the database schema:</p>
+<div class="highlight-python"><pre>$ python manage.py schemamigration app_name --auto
+$ python manage.py migrate app_name</pre>
+</div>
+</div>
+<div class="section" id="staging">
+<h2>Staging<a class="headerlink" href="#staging" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>$ fab deploy_staging</pre>
+</div>
+</div>
+<div class="section" id="production">
+<h2>Production<a class="headerlink" href="#production" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+</div>
 
 
           </div>
@@ -59,15 +87,25 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Workflow</a><ul>
+<li><a class="reference internal" href="#development">Development</a></li>
+<li><a class="reference internal" href="#staging">Staging</a></li>
+<li><a class="reference internal" href="#production">Production</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="staging.html"
-                        title="previous chapter">Staging Configuration</a></p>
+  <p class="topless"><a href="production.html"
+                        title="previous chapter">Production Configuration</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="workflow.html"
-                        title="next chapter">Workflow</a></p>
+  <p class="topless"><a href="credits.html"
+                        title="next chapter">Credits</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="_sources/production.txt"
+    <li><a href="_sources/workflow.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -94,10 +132,10 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="workflow.html" title="Workflow"
+          <a href="credits.html" title="Credits"
              >next</a> |</li>
         <li class="right" >
-          <a href="staging.html" title="Staging Configuration"
+          <a href="production.html" title="Production Configuration"
              >previous</a> |</li>
         <li><a href="index.html">django-layout 0.1 documentation</a> &raquo;</li> 
       </ul>

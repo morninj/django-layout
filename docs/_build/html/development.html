@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="django-layout 0.1 documentation" href="index.html" />
-    <link rel="next" title="Staging" href="staging.html" />
+    <link rel="next" title="Staging Configuration" href="staging.html" />
     <link rel="prev" title="Introduction" href="introduction.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="staging.html" title="Staging"
+          <a href="staging.html" title="Staging Configuration"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="introduction.html" title="Introduction"
@@ -120,25 +120,6 @@ $ python manage.py syncdb</pre>
 </div>
 <p>Your project should now be available at <tt class="docutils literal"><span class="pre">http://127.0.0.1:8000/</span></tt>.</p>
 </div>
-<div class="section" id="development-workflow">
-<h2>Development Workflow<a class="headerlink" href="#development-workflow" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>$ cd /path/to/virtualenv/
-$ workon project_name
-$ cd src/project_name
-$ git pull origin master # Pull changes
-$ python manage.py runserver
-... # Make changes
-$ git commit -am "Description of changes"
-$ git push origin master</pre>
-</div>
-<p>When adding an app, create the initial schema migration with South:</p>
-<div class="highlight-python"><pre>$ python manage.py app_name --initial</pre>
-</div>
-<p>When updating an app&#8217;s models, use South to migrate the database schema:</p>
-<div class="highlight-python"><pre>$ python manage.py schemamigration app_name --auto
-$ python manage.py migrate app_name</pre>
-</div>
-</div>
 </div>
 
 
@@ -154,7 +135,6 @@ $ python manage.py migrate app_name</pre>
 <li><a class="reference internal" href="#create-new-django-project">Create New Django Project</a></li>
 <li><a class="reference internal" href="#initialize-repository">Initialize Repository</a></li>
 <li><a class="reference internal" href="#configure-settings">Configure Settings</a></li>
-<li><a class="reference internal" href="#development-workflow">Development Workflow</a></li>
 </ul>
 </li>
 </ul>
@@ -164,7 +144,7 @@ $ python manage.py migrate app_name</pre>
                         title="previous chapter">Introduction</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="staging.html"
-                        title="next chapter">Staging</a></p>
+                        title="next chapter">Staging Configuration</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/development.txt"
@@ -194,7 +174,7 @@ $ python manage.py migrate app_name</pre>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="staging.html" title="Staging"
+          <a href="staging.html" title="Staging Configuration"
              >next</a> |</li>
         <li class="right" >
           <a href="introduction.html" title="Introduction"
