@@ -21,7 +21,13 @@ Change to the settings directory:
     $ cd /path/to/virtualenvs/project_name/src/project_name/project_name
 
 Edit the settings in ``production.py`` to match the settings for your staging 
-server.
+server. For instance, you may want to add credentials for a database server. 
+Also, don't forget to add your staging and production domains to 
+``ALLOWED_HOSTS``--e.g.:
+
+::
+
+    ALLOWED_HOSTS = ['staging.example.com', 'www.example.com']
 
 Next, change to the ``conf`` directory:
 
@@ -35,6 +41,8 @@ Edit the following files and make sure the values are correct:
 -  ``nginx.staging.conf``: nginx virtual host configuration
 -  ``launch.sh``: a shell script to launch the Gunicorn server
 -  ``livesite.conf``: an Upstart configuration to launch Gunicorn on boot
+
+Commit your changes and push them to the repository.
 
 Configure Staging Server
 ------------------------

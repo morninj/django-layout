@@ -64,7 +64,12 @@ the settings below will also apply in production.</p>
 <div class="highlight-python"><pre>$ cd /path/to/virtualenvs/project_name/src/project_name/project_name</pre>
 </div>
 <p>Edit the settings in <tt class="docutils literal"><span class="pre">production.py</span></tt> to match the settings for your staging
-server.</p>
+server. For instance, you may want to add credentials for a database server.
+Also, don&#8217;t forget to add your staging and production domains to
+<tt class="docutils literal"><span class="pre">ALLOWED_HOSTS</span></tt>&#8211;e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;staging.example.com&#39;</span><span class="p">,</span> <span class="s">&#39;www.example.com&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
 <p>Next, change to the <tt class="docutils literal"><span class="pre">conf</span></tt> directory:</p>
 <div class="highlight-python"><pre>$ cd ../conf</pre>
 </div>
@@ -75,6 +80,7 @@ server.</p>
 <li><tt class="docutils literal"><span class="pre">launch.sh</span></tt>: a shell script to launch the Gunicorn server</li>
 <li><tt class="docutils literal"><span class="pre">livesite.conf</span></tt>: an Upstart configuration to launch Gunicorn on boot</li>
 </ul>
+<p>Commit your changes and push them to the repository.</p>
 </div>
 <div class="section" id="configure-staging-server">
 <h2>Configure Staging Server<a class="headerlink" href="#configure-staging-server" title="Permalink to this headline">¶</a></h2>
@@ -148,7 +154,7 @@ $ fab configure_staging_server</pre>
     </div>
     <div class="footer">
         &copy; Copyright 2013, Joseph Mornin.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
     </div>
   </body>
 </html>
