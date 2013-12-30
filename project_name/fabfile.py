@@ -1,6 +1,8 @@
 from fabric.api import *
+from fabric.contrib.files import *
 from contextlib import contextmanager as _contextmanager
 from conf.production import *
+import getpass
 
 # Configure server admin login credentials
 if ROOT_USE_PASSWORD:
@@ -18,9 +20,13 @@ def configure_production():
     # TODO configure_server('production')
 
 def configure_server(deploy):
+    production_name = prompt('Database name (enter "local.db" if using SQLite): ')
+    production_user = prompt('Database user (leave blank if using SQLite): ')
+    production_password = getpass.getpass(prompt='Database password (leave blank if using SQLite): ')
     sudo('apt-get update -y && apt-get upgrade -y')
     sudo('apt-get install ' + APT_PACKAGES + ' -y')
     if NGINX: install_nginx()
+    if MYSQL: install_mysql(db_name=production_name, db_user=production_user, db_pass=production_password)
     if ADD_NEW_USER: add_new_user()
     if SECURITY_TOOLS: install_security_tools()
     sudo('easy_install pip')
@@ -53,10 +59,9 @@ def configure_server(deploy):
                     # Enable production settings
                     sudo('echo "from default import *" >> settings.py')
                     sudo('echo "from production import *" >> settings.py')
-                    # TODO instead of keeping the live database password in 
-                    # production.py, prompt for it here and then replace it in 
-                    # the file; see fab prompt() and fab sed(); more:
-                    # http://docs.fabfile.org/en/1.4.0/api/contrib/files.html
+                    sudo('echo "production_name = \'' + production_name + '\'" > production_database.py')
+                    sudo('echo "production_user = \'' + production_user + '\'" >> production_database.py')
+                    sudo('echo "production_password = \'' + production_password + '\'" >> production_database.py')
                 with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + \
                     PROJECT_NAME + '/conf/'):
                     # Set permissions on the launch shell script
@@ -82,6 +87,11 @@ def configure_server(deploy):
                     PROJECT_NAME):
                     # Collect static files
                     sudo('../../bin/python2.* manage.py collectstatic')
+                # Install mysql-python
+                # This isn't in pip's requirements.txt because installing 
+                # mysql-python in a Mac dev environment is such a pain; see
+                # http://stackoverflow.com/questions/1448429/how-to-install-mysqldb-python-data-access-library-to-mysql-on-mac-os-x
+                sudo('pip install mysql-python')
                 # Syncdb and apply migrations
                 sudo('chown ' + ROOT_USER + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + ' -R')
                 with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + PROJECT_NAME):
@@ -90,7 +100,7 @@ def configure_server(deploy):
                         run('python manage.py migrate')
     # Set ownership permissions
     # Later interactions with the server will take place via the account of 
-    # the main user, *not* the server admin (ROOT_USER)
+    # the main user (USER), *not* the server admin (ROOT_USER)
     sudo('chown ' + USER + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + ' -R')
     sudo('service nginx restart')
     # TODO reboot system?
@@ -152,4 +162,10 @@ def install_security_tools():
 def install_nginx():
     sudo('apt-get install -y nginx')
     sudo('update-rc.d nginx defaults') # Start nginx on boot
+
+def install_mysql(db_name, db_user, db_pass):
+    sudo('apt-get install -y mysql-server')
+    sudo('mysql_install_db')
+    sudo('/usr/bin/mysql_secure_installation')
+    sudo('mysql -uroot -e "CREATE DATABASE ' + db_name + '; CREATE USER ' + db_user + '@localhost; SET PASSWORD FOR ' + db_user + '@localhost= PASSWORD(\'' + db_pass + '\'); GRANT ALL PRIVILEGES ON ' + db_name + '.* TO ' + db_user + '@localhost IDENTIFIED BY \'' + db_pass + '\'; FLUSH PRIVILEGES;" -p')
 
