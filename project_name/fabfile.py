@@ -8,7 +8,6 @@ if ROOT_USE_PASSWORD:
 else:
     env.key_filename = ROOT_PRIVATE_KEY
 
-# TODO change name to configure_staging in the docs
 @hosts(ROOT_USER + '@' + STAGING_SERVER_HOST)
 def configure_staging():
     configure_server('staging')

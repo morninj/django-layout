@@ -53,7 +53,7 @@ the server environment. To configure the staging server, run:
 ::
 
     $ cd .. # you should now be in the same directory as fabfile.py
-    $ fab configure_staging_server
+    $ fab configure_staging
 
 Fabric will show the output of each command. You may be prompted for passwords 
 (e.g., to log into the server or to clone the repository).
