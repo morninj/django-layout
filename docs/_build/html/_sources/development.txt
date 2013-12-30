@@ -27,14 +27,15 @@ Create New Django Project
 
 Make sure you're in directory and that the virtualenv is activated.
 
-First, install Django 1.5.1:
+First, install Django 1.6.1:
 
 ::
 
-    $ pip install Django==1.5.1
+    $ pip install Django==1.6.1
 
 Next, create a new Django project based on the ``django-layout`` template 
-(replacing ``project_name`` with the name of your project):
+(replacing ``project_name`` at the end of the command with the name of your 
+project):
 
 ::
 
