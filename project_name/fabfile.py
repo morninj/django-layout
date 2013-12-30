@@ -103,7 +103,8 @@ def configure_server(deploy):
     # the main user (USER), *not* the server admin (ROOT_USER)
     sudo('chown ' + USER + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + ' -R')
     sudo('service nginx restart')
-    # TODO reboot system?
+    print 'Rebooting...'
+    reboot()
 
 @hosts(USER + '@' + STAGING_SERVER_HOST)
 def deploy_staging():
@@ -168,4 +169,5 @@ def install_mysql(db_name, db_user, db_pass):
     sudo('mysql_install_db')
     sudo('/usr/bin/mysql_secure_installation')
     sudo('mysql -uroot -e "CREATE DATABASE ' + db_name + '; CREATE USER ' + db_user + '@localhost; SET PASSWORD FOR ' + db_user + '@localhost= PASSWORD(\'' + db_pass + '\'); GRANT ALL PRIVILEGES ON ' + db_name + '.* TO ' + db_user + '@localhost IDENTIFIED BY \'' + db_pass + '\'; FLUSH PRIVILEGES;" -p')
+
 
