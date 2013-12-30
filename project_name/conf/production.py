@@ -37,7 +37,6 @@ SECURITY_TOOLS = True
 # Firewall configuration: allow traffic on these ports
 ALLOWED_PORTS = ['22', '80', '443', '8000']
 # TODO separate firewall for production
-# TODO aws security group to allow 443
 
 # Enable automatic security updates?
 ENABLE_AUTOMATIC_SECURITY_UPDATES = True
