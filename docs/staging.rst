@@ -57,3 +57,10 @@ the server environment. To configure the staging server, run:
 
 Fabric will show the output of each command. You may be prompted for passwords 
 (e.g., to log into the server or to clone the repository).
+
+Verify
+------
+
+Navigate to the staging server address. If you see "Bad Request (400)", it's 
+probably because ``ALLOWED_HOSTS`` is set incorrectly. Make sure your domain 
+is in ``ALLOWED_HOSTS`` in ``src/project_name/project_name/production.py``.

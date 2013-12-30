@@ -76,4 +76,14 @@ def configure_server(deploy):
 
 # TODO: update server
 
+@hosts(STAGING_SERVER)
+def deploy_staging():
+    deploy('staging')
+
+def deploy(deploy):
+    if deploy is 'staging':
+        with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src'):
+            sudo('git pull origin master')
+            sudo('service livesite restart')
+            sudo('service nginx restart')
 
