@@ -21,7 +21,8 @@ def configure_server(deploy):
     sudo('apt-get update -y && apt-get upgrade -y')
     # TODO move nginx to separate function
     # TODO packages to list in production.py
-    sudo('apt-get install git nginx python-setuptools python-dev -y')
+    if NGINX: install_nginx()
+    sudo('apt-get install git python-setuptools python-dev -y')
     # TODO: move package list to production_config.py
     if ADD_NEW_USER: add_new_user()
     if SECURITY_TOOLS: install_security_tools()
@@ -150,4 +151,8 @@ def install_security_tools():
         sudo('echo \'APT::Periodic::Download-Upgradeable-Packages "1";\' >> /etc/apt/apt.conf.d/10periodic')
         sudo('echo \'APT::Periodic::AutocleanInterval "7";\' >> /etc/apt/apt.conf.d/10periodic')
         sudo('echo \'APT::Periodic::Unattended-Upgrade "1";\' >> /etc/apt/apt.conf.d/10periodic')
+
+def install_nginx():
+    sudo('apt-get install -y nginx')
+    sudo('update-rc.d nginx defaults') # Start nginx on boot
 

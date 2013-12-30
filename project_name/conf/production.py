@@ -31,6 +31,12 @@ VIRTUALENV_ROOT = '/var/sites/virtualenvs/'
 # Project name (auto-generated; should match your Django project name)
 PROJECT_NAME = '{{ project_name }}'
 
+# Tools
+NGINX = True
+MYSQL = True
+PHP = True
+WORDPRESS = True
+
 # Install security tools?
 SECURITY_TOOLS = True
 
