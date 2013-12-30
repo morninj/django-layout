@@ -2,30 +2,40 @@ from fabric.api import *
 from contextlib import contextmanager as _contextmanager
 from conf.production import *
 
-env.key_filename = PRIVATE_KEY_FILE
-STAGING_SERVER = USER + '@' + STAGING_SERVER_HOST
-PRODUCTION_SERVER = USER + '@' + PRODUCTION_SERVER_HOST
+# Configure server admin login credentials
+if ROOT_USE_PASSWORD:
+    env.password = ROOT_PASSWORD
+else:
+    env.key_filename = ROOT_PRIVATE_KEY
 
-@hosts(STAGING_SERVER)
-def configure_staging_server():
+# TODO change name to configure_staging in the docs
+@hosts(ROOT_USER + '@' + STAGING_SERVER_HOST)
+def configure_staging():
     configure_server('staging')
 
-@hosts(PRODUCTION_SERVER)
-def configure_production_server():
+@hosts(ROOT_USER + '@' + PRODUCTION_SERVER_HOST)
+def configure_production():
     pass
     # TODO configure_server('production')
 
 def configure_server(deploy):
     sudo('apt-get update -y && apt-get upgrade -y')
+    # TODO move nginx to separate function
+    # TODO packages to list in production.py
     sudo('apt-get install git nginx python-setuptools python-dev -y')
     # TODO: move package list to production_config.py
-    # TODO add user
-    # TODO add security tools
+    if ADD_NEW_USER: add_new_user()
+    if SECURITY_TOOLS: install_security_tools()
     sudo('easy_install pip')
     sudo('sudo pip install virtualenv virtualenvwrapper')
+    # Configure virtualenvwrapper for server admin
     run('echo "WORKON_HOME=' + VIRTUALENV_ROOT + '" >> ~/.bash_profile')
     run('echo "source /usr/local/bin/virtualenvwrapper.sh" >> ' \
         '~/.bash_profile')
+    # Also configure virtualenvwrapper for main user
+    sudo('echo "WORKON_HOME=' + VIRTUALENV_ROOT + '" >> /home/' + USER + '/.bash_profile')
+    sudo('echo "source /usr/local/bin/virtualenvwrapper.sh" >> ' \
+        '/home/' + USER + '/.bash_profile')
     sudo('mkdir -p ' + VIRTUALENV_ROOT)
     with prefix('WORKON_HOME=' + VIRTUALENV_ROOT):
         with prefix('source /usr/local/bin/virtualenvwrapper.sh'):
@@ -46,6 +56,10 @@ def configure_server(deploy):
                     # Enable production settings
                     sudo('echo "from default import *" >> settings.py')
                     sudo('echo "from production import *" >> settings.py')
+                    # TODO instead of keeping the live database password in 
+                    # production.py, prompt for it here and then replace it in 
+                    # the file; see fab prompt() and fab sed(); more:
+                    # http://docs.fabfile.org/en/1.4.0/api/contrib/files.html
                 with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + \
                     PROJECT_NAME + '/conf/'):
                     # Set permissions on the launch shell script
@@ -71,21 +85,24 @@ def configure_server(deploy):
                     PROJECT_NAME):
                     # Collect static files
                     sudo('../../bin/python2.* manage.py collectstatic')
-                # Set ownership permissions
-                sudo('chown ' + USER + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + ' -R')
                 # Syncdb and apply migrations
+                sudo('chown ' + ROOT_USER + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + ' -R')
                 with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + PROJECT_NAME):
                     with prefix('workon ' + PROJECT_NAME): 
                         run('python manage.py syncdb')
                         run('python manage.py migrate')
-                # FIXME add USER to production.py
-                sudo('service nginx restart')
+    # Set ownership permissions
+    # Later interactions with the server will take place via the account of 
+    # the main user, *not* the server admin (ROOT_USER)
+    sudo('chown ' + USER + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + ' -R')
+    sudo('service nginx restart')
+    # TODO reboot system?
 
-@hosts(STAGING_SERVER)
+@hosts(USER + '@' + STAGING_SERVER_HOST)
 def deploy_staging():
     deploy('staging')
 
-@hosts(PRODUCTION_SERVER)
+@hosts(USER + '@' + PRODUCTION_SERVER_HOST)
 def deploy_production():
     pass
     # TODO deploy('staging')
@@ -101,4 +118,37 @@ def deploy(deploy):
                     run('python manage.py collectstatic')
             sudo('service livesite restart')
             sudo('service nginx restart')
+
+def add_new_user():
+    sudo('adduser ' + USER)
+    sudo('adduser %s sudo' % USER)
+    # Upload user's private key
+    put(USER_PUBLIC_KEY, '/var/tmp/public_key')
+    sudo('mkdir /home/%s/.ssh/' % USER)
+    sudo('cat /var/tmp/public_key >> /home/%s/.ssh/authorized_keys' % \
+        USER)
+    sudo('rm /var/tmp/public_key')
+    sudo('chmod 700 /home/%s/.ssh' % USER)
+    sudo('chmod 400 /home/%s/.ssh/authorized_keys' % USER)
+    sudo('chown {0}:{0} /home/{0} -R'.format(USER))
+
+def install_security_tools():
+    # Install fail2ban to block suspicious activity
+    sudo('apt-get install -y fail2ban')
+    # Only allow SSH key access
+    sudo('echo "PasswordAuthentication no" >> /etc/ssh/sshd_config')
+    # Prevent root login
+    sudo('echo "PermitRootLogin no" >> /etc/ssh/sshd_config')
+    # Configure firewall
+    for port in ALLOWED_PORTS:
+        sudo('ufw allow ' + port)
+    sudo('ufw enable')
+    # TODO sudo('ufw enable -y') ?
+    # Enable automatic security updates
+    if ENABLE_AUTOMATIC_SECURITY_UPDATES:
+        sudo('apt-get install unattended-upgrades -y')
+        sudo('echo \'APT::Periodic::Update-Package-Lists "1";\' > /etc/apt/apt.conf.d/10periodic')
+        sudo('echo \'APT::Periodic::Download-Upgradeable-Packages "1";\' >> /etc/apt/apt.conf.d/10periodic')
+        sudo('echo \'APT::Periodic::AutocleanInterval "7";\' >> /etc/apt/apt.conf.d/10periodic')
+        sudo('echo \'APT::Periodic::Unattended-Upgrade "1";\' >> /etc/apt/apt.conf.d/10periodic')
 
