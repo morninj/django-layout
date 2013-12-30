@@ -10,10 +10,17 @@ PRODUCTION_SERVER = USER + '@' + PRODUCTION_SERVER_HOST
 def configure_staging_server():
     configure_server('staging')
 
+@hosts(PRODUCTION_SERVER)
+def configure_production_server():
+    pass
+    # TODO configure_server('production')
+
 def configure_server(deploy):
-    sudo('apt-get update -y')
+    sudo('apt-get update -y && apt-get upgrade -y')
     sudo('apt-get install git nginx python-setuptools python-dev -y')
     # TODO: move package list to production_config.py
+    # TODO add user
+    # TODO add security tools
     sudo('easy_install pip')
     sudo('sudo pip install virtualenv virtualenvwrapper')
     run('echo "WORKON_HOME=' + VIRTUALENV_ROOT + '" >> ~/.bash_profile')
@@ -68,4 +75,5 @@ def configure_server(deploy):
                 # TODO: set proper file permissions
 
 # TODO: update server
+
 
