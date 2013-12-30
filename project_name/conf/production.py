@@ -17,7 +17,7 @@ ROOT_PRIVATE_KEY = '' # Local path to the root user's private key--e.g., ~/.aws/
 # This script will create the user on the server and upload your public key
 ADD_NEW_USER = True
 USER_PUBLIC_KEY = '' # Local path to your public key--e.g., ~/.ssh/id_dsa.pub
-USER = '' # Make sure the user has root privileges
+USER = ''
 
 # Version control repository connection
 # E.g., git://github.com/username/repo-name.git
