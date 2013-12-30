@@ -71,19 +71,34 @@ def configure_server(deploy):
                     PROJECT_NAME):
                     # Collect static files
                     sudo('../../bin/python2.* manage.py collectstatic')
+                # Set ownership permissions
+                sudo('chown ' + USER + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + ' -R')
+                # Syncdb and apply migrations
+                with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + PROJECT_NAME):
+                    with prefix('workon ' + PROJECT_NAME): 
+                        run('python manage.py syncdb')
+                        run('python manage.py migrate')
+                # FIXME add USER to production.py
                 sudo('service nginx restart')
-                # TODO: set proper file permissions
-
-# TODO: update server
 
 @hosts(STAGING_SERVER)
 def deploy_staging():
     deploy('staging')
 
+@hosts(PRODUCTION_SERVER)
+def deploy_production():
+    pass
+    # TODO deploy('staging')
+
 def deploy(deploy):
     if deploy is 'staging':
         with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src'):
             sudo('git pull origin master')
+            with cd(VIRTUALENV_ROOT + PROJECT_NAME + '/src/' + PROJECT_NAME):
+                with prefix('workon ' + PROJECT_NAME): 
+                    run('python manage.py syncdb')
+                    run('python manage.py migrate')
+                    run('python manage.py collectstatic')
             sudo('service livesite restart')
             sudo('service nginx restart')
 
