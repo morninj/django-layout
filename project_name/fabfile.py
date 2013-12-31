@@ -29,7 +29,6 @@ def configure_server(deploy):
     if MYSQL: install_mysql(db_name=production_name, db_user=production_user, db_pass=production_password)
     if CONFIGURE_SWAP: configure_swap()
     if ADD_NEW_USER: add_new_user()
-    if SECURITY_TOOLS: install_security_tools(deploy)
     sudo('easy_install pip')
     sudo('sudo pip install virtualenv virtualenvwrapper')
     # Configure virtualenvwrapper for server admin
@@ -103,6 +102,7 @@ def configure_server(deploy):
     # Later interactions with the server will take place via the account of 
     # the main user (USER), *not* the server admin (ROOT_USER)
     sudo('chown ' + USER + ' ' + VIRTUALENV_ROOT + PROJECT_NAME + ' -R')
+    if SECURITY_TOOLS: install_security_tools(deploy)
     sudo('service nginx restart')
     print 'Rebooting...'
     reboot()
