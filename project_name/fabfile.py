@@ -29,7 +29,7 @@ def configure_server(deploy):
     if MYSQL: install_mysql(db_name=production_name, db_user=production_user, db_pass=production_password)
     if CONFIGURE_SWAP: configure_swap()
     if ADD_NEW_USER: add_new_user()
-    if SECURITY_TOOLS: install_security_tools()
+    if SECURITY_TOOLS: install_security_tools(deploy)
     sudo('easy_install pip')
     sudo('sudo pip install virtualenv virtualenvwrapper')
     # Configure virtualenvwrapper for server admin
@@ -149,6 +149,10 @@ def install_security_tools():
     # Prevent root login
     sudo('echo "PermitRootLogin no" >> /etc/ssh/sshd_config')
     # Configure firewall
+    if deploy is 'staging':
+        ALLOWED_PORTS = ALLOWED_PORTS_STAGING
+    if deploy is 'production':
+        ALLOWED_PORTS = ALLOWED_PORTS_PRODUCTION
     for port in ALLOWED_PORTS:
         sudo('ufw allow ' + port)
     sudo('ufw enable')

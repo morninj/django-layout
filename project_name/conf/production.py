@@ -45,8 +45,8 @@ SECURITY_TOOLS = True
 # 443: HTTPS
 # 8000: gunicorn
 # If you're using AWS, make sure your security group allows traffic on these ports
-ALLOWED_PORTS = ['22', '80', '443', '8000']
-# TODO separate firewall for production
+ALLOWED_PORTS_STAGING = ['22', '80', '443', '8000']
+ALLOWED_PORTS_PRODUCTION = ['80', '443', '8000']
 
 # Enable automatic security updates?
 ENABLE_AUTOMATIC_SECURITY_UPDATES = True
