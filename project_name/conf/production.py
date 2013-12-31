@@ -36,8 +36,6 @@ NGINX = True
 MYSQL = True # Install MySQL server? (set False if you want to connect to an external MySQL server that has already been configured)
 APT_PACKAGES = 'git python-setuptools python-dev python-mysqldb libmysqlclient-dev'
 
-# TODO mysql swap
-
 # Install security tools?
 SECURITY_TOOLS = True
 
@@ -53,3 +51,6 @@ ALLOWED_PORTS = ['22', '80', '443', '8000']
 # Enable automatic security updates?
 ENABLE_AUTOMATIC_SECURITY_UPDATES = True
 
+# Configure swap?
+CONFIGURE_SWAP = True
+SWAP_SIZE = '512k'

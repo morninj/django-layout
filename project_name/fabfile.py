@@ -27,6 +27,7 @@ def configure_server(deploy):
     sudo('apt-get install ' + APT_PACKAGES + ' -y')
     if NGINX: install_nginx()
     if MYSQL: install_mysql(db_name=production_name, db_user=production_user, db_pass=production_password)
+    if CONFIGURE_SWAP: configure_swap()
     if ADD_NEW_USER: add_new_user()
     if SECURITY_TOOLS: install_security_tools()
     sudo('easy_install pip')
@@ -169,4 +170,8 @@ def install_mysql(db_name, db_user, db_pass):
     sudo('/usr/bin/mysql_secure_installation')
     sudo('mysql -uroot -e "CREATE DATABASE ' + db_name + '; CREATE USER ' + db_user + '@localhost; SET PASSWORD FOR ' + db_user + '@localhost= PASSWORD(\'' + db_pass + '\'); GRANT ALL PRIVILEGES ON ' + db_name + '.* TO ' + db_user + '@localhost IDENTIFIED BY \'' + db_pass + '\'; FLUSH PRIVILEGES;" -p')
 
-
+def configure_swap():
+    sudo('dd if=/dev/zero of=/swapfile bs=1024 count=' + SWAP_SIZE)
+    sudo('mkswap /swapfile')
+    sudo('swapon /swapfile')
+    sudo('swapon -s')
