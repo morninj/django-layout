@@ -151,7 +151,6 @@ def install_security_tools():
     for port in ALLOWED_PORTS:
         sudo('ufw allow ' + port)
     sudo('ufw enable')
-    # TODO sudo('ufw enable -y') ?
     # Enable automatic security updates
     if ENABLE_AUTOMATIC_SECURITY_UPDATES:
         sudo('apt-get install unattended-upgrades -y')
